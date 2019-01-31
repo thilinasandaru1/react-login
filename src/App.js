@@ -1,28 +1,40 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import injectTapEventPlugin from "react-tap-event-plugin";
 
-class App extends Component {
+import "./App.css";
+import LoginScreen from "./Loginscreen";
+
+injectTapEventPlugin();
+
+export class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loginPage: [],
+      uploadScreen: []
+    };
+  }
+
+  componentWillMount() {
+    var LoginPage = [];
+    loginPage.push(<Loginscreen parentContext={this} />);
+    this.setState({
+      loginPage: loginPage
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        {this.state.loginPage}
+        {this.state.uploadScreen}
       </div>
     );
   }
 }
+
+const style = {
+  margin: 15
+};
 
 export default App;
